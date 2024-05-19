@@ -16,9 +16,38 @@ function processArray(numbers) {
     });
 }
 
+/**
+ * Function to format an array of strings with a processed array of numbers.
+ * Capitalizes the string if the corresponding number is even.
+ * Converts the string to lowercase if the corresponding number is odd.
+ * @param {string[]} strings - The array of strings.
+ * @param {number[]} processedNumbers - The array of processed numbers.
+ * @returns {string[]} - The new array of formatted strings.
+ */
+function formatArrayStrings(strings, processedNumbers) {
+    if (strings.length !== processedNumbers.length) {
+        throw new Error('The lengths of the two arrays must match.');
+    }
+
+    return strings.map((str, index) => {
+        if (processedNumbers[index] % 2 === 0) {
+            return str.toUpperCase();
+        } else {
+            return str.toLowerCase();
+        }
+    });
+}
+
 // Example usage:
 const inputArray = [1, 2, 3, 4, 5];
 const resultArray = processArray(inputArray);
 console.log(resultArray); // Output: [3, 4, 9, 16, 15]
 
-module.exports = processArray;
+const stringArray = ['one', 'two', 'three', 'four', 'five'];
+const formattedStrings = formatArrayStrings(stringArray, resultArray);
+console.log(formattedStrings); // Output: ['one', 'TWO', 'three', 'FOUR', 'five']
+
+module.exports = {
+    processArray,
+    formatArrayStrings
+};
